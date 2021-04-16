@@ -70,11 +70,11 @@ def get_balance():
   params = get_default_params()
   res = kraken_request('/0/private/Balance', params, api_key, api_sec)
 
-  return res.json()
+  return res.json()['result']
 
 def get_tickers_info(tickers):
   params = get_default_params()
   params['pair'] = ','.join(transform_tickers_to_pairs(tickers))
   res = kraken_request('/0/public/Ticker', params, api_key, api_sec)
   
-  return res.json()
+  return res.json()['result']
