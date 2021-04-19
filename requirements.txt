@@ -1,1 +1,2 @@
-requests=2.25.1
+requests==2.25.1
+azure-cosmos==4.2.0

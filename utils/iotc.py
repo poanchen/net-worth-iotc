@@ -10,6 +10,15 @@ def transform_tickers_and_data_to_telemetries(res, tickers, data, additional_dat
     'XETH': ['CurrentAskPriceForEthereum', 'CurrentEthereumTotalMarketValue', 'NumberOfEthereum'],
     'UNI': ['CurrentAskPriceForUniswap', 'CurrentUniswapTotalMarketValue', 'NumberOfUniswap'],
     'GRT': ['CurrentAskPriceForTheGraph', 'CurrentTheGraphTotalMarketValue', 'NumberOfTheGraph'],
+
+    # questrade stock symbol ids
+    '19719': ['CurrentAskPriceForGameStop', 'CurrentGameStopTotalMarketValue', 'NumberOfGameStop'],
+    '34113874': ['CurrentAskPriceForRoblox', 'CurrentRobloxTotalMarketValue', 'NumberOfRoblox'],
+    '32466046': ['CurrentAskPriceForPalantir', 'CurrentPalantirTotalMarketValue', 'NumberOfPalantir'],
+    '27116163': ['CurrentAskPriceForCloudflare', 'CurrentCloudflareTotalMarketValue', 'NumberOfCloudflare'],
+    '33418187': ['CurrentAskPriceForAirbnb', 'CurrentAirbnbTotalMarketValue', 'NumberOfAirbnb'],
+    '25766645': ['CurrentAskPriceForFastly', 'CurrentFastlyTotalMarketValue', 'NumberOfFastly'],
+    '32220649': ['CurrentAskPriceForUnity', 'CurrentUnityTotalMarketValue', 'NumberOfUnity']
   }
 
   try:
@@ -29,10 +38,11 @@ def transform_tickers_and_data_to_telemetries(res, tickers, data, additional_dat
     pass
 
   for key in additional_data:
-    try:
-      res[key] += additional_data[key]
-    except:
-      res[key] = additional_data[key]
+    if additional_data[key] > 0:
+      try:
+        res[key] += additional_data[key]
+      except:
+        res[key] = additional_data[key]
 
   return res
 
@@ -48,7 +58,8 @@ def send_telemetry(data):
 def get_current_exchange_total_market_value_key(exchange):
   available_exchange = {
     'kraken': 'CurrentKrakenTotalMarketValue',
-    'poloniex': 'CurrentPoloniexTotalMarketValue'
+    'poloniex': 'CurrentPoloniexTotalMarketValue',
+    'questrade': 'CurrentQuestradeTotalMarketValue'
   }
 
   return available_exchange[exchange]

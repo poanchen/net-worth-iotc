@@ -50,7 +50,7 @@ def get_balance():
 
   return res.json()
 
-def get_tickers_info(ticker):
+def get_tickers_info(tickers):
   res = requests.get(poloniex_config['api_domain'] + '/public?command=returnTicker')
 
   return res.json()
