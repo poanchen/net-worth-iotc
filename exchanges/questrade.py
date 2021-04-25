@@ -63,6 +63,8 @@ def get_balance():
   res = get_accounts()
   combined_positions = {}
 
+  print("Found %s account(s) in questrade." % len(res['accounts']))
+
   for account in res['accounts']:
     positions_res = questrade_request('v1/accounts/%s/positions' % account['number']).json()
     for position in positions_res['positions']:
@@ -70,7 +72,7 @@ def get_balance():
         combined_positions[str(position['symbolId'])] += position['openQuantity']
       except:
         combined_positions[str(position['symbolId'])] = position['openQuantity']
-
+  
   return combined_positions
 
 def get_tickers_info(tickers):

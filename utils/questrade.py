@@ -5,7 +5,7 @@ def get_current_price(tickers_info_res, Exchange, ticker):
       break
     i+=1
   
-  if tickers_info_res[i]['askPrice'] == None:
+  if tickers_info_res[i]['bidPrice'] == None:
     return float(tickers_info_res[i]['lastTradePrice'])
 
-  return float(tickers_info_res[i]['askPrice'])
+  return float(tickers_info_res[i]['bidPrice'])
