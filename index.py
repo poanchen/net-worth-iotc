@@ -55,9 +55,13 @@ def query_exchange(res, Exchange, Exchange_specific_utils, exchange):
 while(True):
   res = {}
 
-  for exchange in config['exchange_to_be_run']:
-    if exchange in config['available_exchange']:
-      res = query_exchange(res, Exchange_utils.get_exchange_client(exchange), Exchange_utils.get_exchange_utils(exchange), exchange)
-  
-  Iotc_utils.send_telemetry(res)
-  sleep(10)
+  try:
+    for exchange in config['exchange_to_be_run']:
+      if exchange in config['available_exchange']:
+        res = query_exchange(res, Exchange_utils.get_exchange_client(exchange), Exchange_utils.get_exchange_utils(exchange), exchange)
+
+    Iotc_utils.send_telemetry(res)
+  except:
+    pass
+  finally:
+    sleep(10)
